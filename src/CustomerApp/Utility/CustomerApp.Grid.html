@@ -1,0 +1,22 @@
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+</style>
+
+<table bgcolor="#ccccff">   
+    <tr>
+           <th *ngFor="let col of gridColumns">
+               {{col.colName}}
+           </th>
+    </tr>
+    <tr *ngFor="let colObj of gridData">
+        <td *ngFor="let col of gridColumns">
+            {{colObj[col.colName]}}
+        </td>
+        <td>
+            <a (click)="SelectGrid(colObj)" [routerLink]="['/Customer/Add']">Select</a>
+        </td>
+    </tr>
+</table>
+   

@@ -1,0 +1,50 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+</style>
+
+<form [formGroup]="CustomerModel.formCustomerGroup">
+<table bgcolor="#ccccff">
+    <tr>
+      <th>Customer Code</th><td><input formControlName="CustomerCodeControl" [(ngModel)]="CustomerModel.CustomerCode" type="text" /></td>
+    </tr>
+    <tr>
+      <th>Customer Name</th><td><input formControlName="CustomerNameControl" [(ngModel)]="CustomerModel.CustomerName" type="text" /></td>
+    </tr>
+    <tr>
+        <th>Customer Amount</th><td><input [ngModelOptions]="{standalone: true}" [(ngModel)]="CustomerModel.CustomerAmount" type="number" /></td>
+    </tr>     
+    <tr>
+        <td colspan="2">
+          <input [disabled]="!(CustomerModel.formCustomerGroup.valid)" (click)="Add()" type="button" value="Add" />
+          <input [disabled]="Disable" type="button" value="Send to server" (click)="PosttoServer()"/>
+        </td>
+    </tr>         
+  </table>
+</form>
+
+<div *ngIf="CustomerModel.formCustomerGroup.dirty" 
+      [hidden]="!(hasError('pattern','CustomerCodeControl'))" >Customer code format is not proper</div><br>
+<div *ngIf="CustomerModel.formCustomerGroup.dirty" 
+      [hidden]="!(hasError('required','CustomerCodeControl'))">Customer code is required</div><br>
+<div *ngIf="CustomerModel.formCustomerGroup.dirty"
+      [hidden]="!(hasError('required','CustomerNameControl'))">Customer name is required</div><br>
+
+<br><br>
+
+<h1>Angular HTTP Service Example</h1>
+
+<grid-ui [grid-columns]="[{'colName':'CustomerCode'},{'colName':'CustomerName'},{'colName':'CustomerAmount'}]" 
+  [grid-data]="CustomerModels"
+  (grid-selected)="SelectCustomer($event)"
+></grid-ui>
+
+
+
+
+
+
+
